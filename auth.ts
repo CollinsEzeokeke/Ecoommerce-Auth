@@ -17,6 +17,10 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
+        password: {
+            hash: // your custom password hashing function
+            verify: // your custom password verification function
+        },
         async sendVerificationEmail(url: String, user: User) {
             const verificationToken = nanoid();
             const verificationUrl = `${url}?token=${verificationToken}`;
