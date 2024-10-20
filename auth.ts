@@ -1,14 +1,13 @@
 import { betterAuth, User } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@prisma/client";
 import { Resend } from 'resend';
+import prisma from "@/prisma";
 import { nanoid } from 'nanoid';
 
 interface String {
     url: string
 }
 
-const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
@@ -17,10 +16,6 @@ export const auth = betterAuth({
     }),
     emailAndPassword: {
         enabled: true,
-        password: {
-            hash: // your custom password hashing function
-            verify: // your custom password verification function
-        },
         async sendVerificationEmail(url: String, user: User) {
             const verificationToken = nanoid();
             const verificationUrl = `${url}?token=${verificationToken}`;
@@ -51,4 +46,8 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
         },
     },
+    session: {
+        expiresIn: 60 * 60 * 24 * 7, // 7 days,
+        updateAge: 60 * 60 * 24 // 1 day (every 1 day the session expiration is updated)
+    }
 });
