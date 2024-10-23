@@ -12,16 +12,16 @@ import {
 } from "@react-email/components";
 import { Tailwind } from "@react-email/tailwind";
 
-interface PlaidVerifyIdentityEmailProps {
+interface EmailVerificationProps {
+  Username: string;
   VerificationToken: string;
-  name: string;
   url: string;
 }
 
-export const EmailVerification: React.FC<PlaidVerifyIdentityEmailProps> = ({
+export const EmailVerification: React.FC<EmailVerificationProps> = ({
+  Username,
   VerificationToken,
-  name,
-  url
+  url,
 }) => (
   <Html>
     <Head />
@@ -29,6 +29,9 @@ export const EmailVerification: React.FC<PlaidVerifyIdentityEmailProps> = ({
     <Tailwind>
       <Body className="bg-white font-sans">
         <Container className="bg-white border border-gray-200 rounded-lg shadow-lg mt-5 mx-auto max-w-[360px] py-16 px-0">
+          <Container className="bg-red-500 text-center">
+            <Text className="text-2xl font-bold">Welcome {Username}! </Text>
+          </Container>
           <Text className="text-blue-500 text-xs font-bold uppercase tracking-wide text-center mt-4 mb-2">
             Verify Your Identity
           </Text>
@@ -41,7 +44,10 @@ export const EmailVerification: React.FC<PlaidVerifyIdentityEmailProps> = ({
             </Text>
           </Section>
           <Section className="my-7 mx-auto w-auto text-center">
-            <Button href={url} className="bg-[#5e6ad2] rounded px-6 py-3 font-semibold text-white text-center mx-auto">
+            <Button
+              href={url}
+              className="bg-[#5e6ad2] rounded px-6 py-3 font-semibold text-white text-center mx-auto"
+            >
               Sign in
             </Button>
           </Section>
@@ -50,10 +56,13 @@ export const EmailVerification: React.FC<PlaidVerifyIdentityEmailProps> = ({
           </Text>
           <Text className="text-gray-700 text-sm leading-6 px-10 m-0 text-center">
             Contact{" "}
-            <Link href="mailto:chiflex@support.com" className="text-gray-700 underline">
+            <Link
+              href="mailto:chiflex@support.com"
+              className="text-gray-700 underline"
+            >
               Chiflex@support.com
-            </Link>
-            {" "}if you did not request this code.
+            </Link>{" "}
+            if you did not request this code.
           </Text>
         </Container>
         <Text className="text-black text-xs font-extrabold uppercase leading-6 mt-5 text-center">

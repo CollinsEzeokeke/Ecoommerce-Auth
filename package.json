@@ -18,7 +18,7 @@
     "@react-email/tailwind": "^0.1.0",
     "@uploadthing/react": "^7.0.3",
     "bcrypt": "^5.1.1",
-    "better-auth": "^0.4.13",
+    "better-auth": "0.5.3-beta.14",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
